@@ -1,28 +1,12 @@
-## Knutwurst's i3 MEGA M/S/P/X/Chiron/4MP2 Hybrid Firmware <br>(based on Marlin 2.1.x)
+# My custom personalization based on Knutwurst awesome work
+Mine is a MEGA S with stock 0.0.3 board and DGUS display, FYSETC TMC2208 V1.2 stepper drivers ([link](https://www.amazon.it/BCZAMD-FYSETC-TMC2208-V1-2-passo-passo/dp/B0CGMWVMPF/ref=sr_1_1?__mk_it_IT=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1QQRPHY7VPGWM&dib=eyJ2IjoiMSJ9.lB055hKyqJxFmAsw1_YneXvtlRQoIa9xjGsh03QpPTlitaR7fK6uDW7pQNjX_AIZ3FLXYGYumsxWnuZMDx6aIsCB-ORJe3WQ9qK8yH49r5cWIIgrAkyMHbqbBvFrmWhxYX5K4pE2hwylpkdFkcxX4EHSYbBNYqTC8pYdzhJkvkZtQZLq2BA-i3cccXN7qFRAsjr9LNaWK4Ho1y8WpZZnjT95kQixwRaL2Yn_SJ5PsoDhXxT9S-qvuxhehEoa9ai6RR9_CQ8I5G2QrgrGKFVl4Ta72GdAwX5y6IEGx2s8gIs.M04G8bqEFT7VxgSYK-as68gZj59Vll6Hj-KwG7yTPOs&dib_tag=se&keywords=fysetc+tmc2208&qid=1717018093&sprefix=fysetc+tmc2208%2Caps%2C66&sr=8-1)), GIANTARM 3D Touch ([link](https://www.amazon.it/Geeetech-3D-Touch-Sensore-stampante/dp/B08HMRWNWX/ref=sr_1_1_sspa?__mk_it_IT=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1CWQJYN5YKSWE&dib=eyJ2IjoiMSJ9.yJ9f0VDeMlWrjY2HyWJbnrs8UtKc28PXTA8CDTPKtFsRsl9QxDiPjs8dSQpIwD-a8fmmPMwvvJymjlpyYhgEWXfklHJlEQImpjh_9Nn_Kc4.8EmI9ueR4Igt2n-h-mw6EjZ9DsUn5NeAhfjPd7Cn5EQ&dib_tag=se&keywords=giantarm%2B3d%2Btouch&qid=1717018382&sprefix=giantarm%2B3d%2Btouch%2Caps%2C79&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1)), MK4 X-Carriage ([link](https://www.thingiverse.com/thing:3537449)), stock E3D V5 Hotend.
 
-## Übersicht
+It uses the z-probe for homing and bilinear ABL with a 4x4 grid.
 
-- [Einsteiger-Leitfaden](https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S/wiki/Beginner's-Guide-(Deutsch))
-- [Funktionen](https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S/wiki/Features-(Deutsch))
-- [Häufig gestellte Fragen (FAQ)](https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S/wiki/FAQ-(deutsch))
-- [Wiki/Umbau-Anleitungen](https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S/wiki)
-- [Offizielle Facebook-Gruppe (deutsch)](https://www.facebook.com/groups/knutwurst/)
-- [Downloads](https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S/releases)
+Other stuff:
+ - switched from PID tuning to MPC tuning ([link](https://marlinfw.org/docs/features/model_predictive_control.html))
+ - enabled G34 command for automatic z-gantry alignment
+ - removed startup chime
+ - incresed default xy jerk to 12.5
 
-### Wenn dir gefällt, was ich mache, kannst du mir hier einen Kaffee spendieren*: [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/oliverkoester)
-<sub>*Es muss jetzt keine großzügige Spende sein. Ein paar Cent reichen um mir zu zeigen, wer überhaupt Interesse daran hat und wem die Weiterentwicklung wichtig ist. So bleibt die Motivation da und ich weiß einfach, dass ich nicht für die Tonne programmiere ;)<sub>
-
-
-## Overview
-
-- [Beginner's Guide](https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S/wiki/Beginner's-Guide-(English))
-- [Features](https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S/wiki/Features-(English))
-- [Frequently asked questions (FAQ)](https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S/wiki/FAQ-(english))
-- [Wiki/Tutotrials](https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S/wiki)
-- [Official Facebook-Group (german)](https://www.facebook.com/groups/knutwurst/)
-- [Downloads](https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S/releases)
-
-
-### If you like what I do you can buy me a coffee*: [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/oliverkoester)
-<sub>*It doesn't have to be a generous donation. A few cents are enough to show me who is interested in further development. So the motivation stays and I just know that I am not programming for the bin ;)<sub>
-
+Which build to launch? **MEGA_S_DGUS_TMC_BLT_10**
