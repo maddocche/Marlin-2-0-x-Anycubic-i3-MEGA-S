@@ -28,6 +28,7 @@
 #define TFT_MAX_CMD_SIZE           96
 #define MSG_MY_VERSION             CUSTOM_BUILD_VERSION
 #define MAX_PRINTABLE_FILENAME_LEN 26
+#define WAIT_MS_UNTIL_ACYCLIC_SEND 500
 
 enum AnycubicMediaPrintState {
   AMPRINTSTATE_NOT_PRINTING,
@@ -228,6 +229,8 @@ class AnycubicTouchscreenClass {
 
     static AnycubicMediaPrintState mediaPrintingState;
     static AnycubicMediaPauseState mediaPauseState;
+    static uint32_t time_last_cyclic_tft_command;
+    static uint8_t delayed_tft_command;
 
 #if defined(POWER_OUTAGE_TEST)
     struct OutageDataStruct {
