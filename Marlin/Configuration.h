@@ -767,8 +767,8 @@
  * PIDTEMP : PID temperature control (~4.1K)
  * MPCTEMP : Predictive Model temperature control. (~1.8K without auto-tune)
  */
-#define PIDTEMP           // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
-//#define MPCTEMP         // See https://marlinfw.org/docs/features/model_predictive_control.html
+//#define PIDTEMP           // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
+#define MPCTEMP         // See https://marlinfw.org/docs/features/model_predictive_control.html
 
 #define PID_MAX  255      // Limit hotend current while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1     0.95   // Smoothing factor within any PID loop
@@ -1269,7 +1269,11 @@
   #if BOTH(KNUTWURST_BLTOUCH, KNUTWURST_4MAXP2)
     #define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
   #else
-    #define Z_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
+    #if BOTH(KNUTWURST_BLTOUCH, MADDOC_Z_PROBE_ENDSTOP)
+      #define Z_MIN_ENDSTOP_INVERTING false
+    #else
+      #define Z_MIN_ENDSTOP_INVERTING true  // Set to true to invert the logic of the endstop.
+    #endif
   #endif
   #define I_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
   #define J_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
@@ -1536,8 +1540,8 @@
 #define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
   #if ANY(KNUTWURST_MEGA, KNUTWURST_MEGA_S, KNUTWURST_MEGA_P)
-    #define DEFAULT_XJERK  8.0
-    #define DEFAULT_YJERK  8.0
+    #define DEFAULT_XJERK  12.5
+    #define DEFAULT_YJERK  12.5
     #define DEFAULT_ZJERK  0.4
   #elif ENABLED(KNUTWURST_MEGA_X)
     #define DEFAULT_XJERK  4.0
@@ -1643,6 +1647,10 @@
  *    - Normally-open (NO) also connect to 5V.
  */
 //#define Z_MIN_PROBE_PIN 32 // Pin 32 is the RAMPS default
+#if ENABLED(MADDOC_Z_PROBE_ENDSTOP)
+  #define USE_PROBE_FOR_Z_HOMING
+  #define Z_MIN_PROBE_PIN 2
+#endif
 
 /**
  * Probe Type
@@ -1838,8 +1846,8 @@
  *     O-- FRONT --+
  */
 #if ENABLED(KNUTWURST_BLTOUCH)
-  #define NOZZLE_TO_PROBE_OFFSET { -2, -25, -0.4 } // https://www.thingiverse.com/thing:2824005
-  // #define NOZZLE_TO_PROBE_OFFSET { 29, -15, 0 } //X-Carriage
+  // #define NOZZLE_TO_PROBE_OFFSET { -2, -25, -0.4 } // https://www.thingiverse.com/thing:2824005
+  #define NOZZLE_TO_PROBE_OFFSET { 29, -15, -1.28 } //X-Carriage
 #endif
 
 #if ENABLED(KNUTWURST_CHIRON)
@@ -1912,7 +1920,7 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-//#define MULTIPLE_PROBING 2
+#define MULTIPLE_PROBING 2
 //#define EXTRA_PROBING    1
 
 /**
@@ -1929,7 +1937,7 @@
  * Example: 'M851 Z-5' with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: 'M851 Z+1' with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   20 // (mm) Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE   15 // (mm) Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // (mm) Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     5 // (mm) Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // (mm) Z position after probing is done
@@ -2579,7 +2587,7 @@
 #if EITHER(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 5
+  #define GRID_MAX_POINTS_X 4
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Probe along the Y axis, advancing X after each column
@@ -2716,8 +2724,11 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#if BOTH(KNUTWURST_BLTOUCH, KNUTWURST_4MAXP2)
-  #define Z_SAFE_HOMING
+// #if BOTH(KNUTWURST_BLTOUCH, KNUTWURST_4MAXP2)
+#if ENABLED(KNUTWURST_BLTOUCH)
+  #if ANY(MADDOC_Z_PROBE_ENDSTOP, KNUTWURST_4MAXP2)
+    #define Z_SAFE_HOMING
+  #endif
 #endif
 
 
@@ -2853,8 +2864,8 @@
 // Preheat Constants - Up to 10 are supported without changes
 //
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 200
-#define PREHEAT_1_TEMP_BED     60
+#define PREHEAT_1_TEMP_HOTEND 190
+#define PREHEAT_1_TEMP_BED     50
 //#define PREHEAT_1_TEMP_CHAMBER 35
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
@@ -3147,6 +3158,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
+
 //#define REVERSE_ENCODER_DIRECTION
 
 //
@@ -3193,7 +3205,7 @@
 
 // Play a (non-earpiercing) startup chime on startup/serial connection
 // of the Trigorilla board
-#define STARTUP_CHIME
+// #define STARTUP_CHIME
 
 //
 // ENDSTOP BEEP
